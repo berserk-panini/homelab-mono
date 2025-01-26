@@ -2,8 +2,24 @@ organization = "berserk-panini"
 email        = "admin@edgy-noodle.com"
 
 projects = {
-  "admin"      = "Houses resources managing the organization across various platforms."
-  "datacenter" = "Houses resources managing the datacenters."
+  "admin"      = "Management of the organizations."
+  "datacenter" = "Management of the datacenters."
+}
+
+variable_sets = {
+  "vsphere-hl01" = {
+    description = "Credentials to the hl01 site vSphere API."
+    project     = "datacenter"
+    hcl_vars = {
+      "allow_unverified_ssl" = "true"
+    }
+    plain_vars = {
+      "user" = "terraform"
+    }
+    sensitive_vars = [
+      "password"
+    ]
+  }
 }
 
 workspaces = {
