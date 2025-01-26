@@ -8,7 +8,6 @@ projects = {
 
 workspaces = {
   "terraform" = {
-    auto_apply        = true
     description       = "Manages this Terraform organization and its resources."
     project           = "admin"
     working_directory = "terraform/root/tf_admin"
