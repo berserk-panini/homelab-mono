@@ -1,0 +1,45 @@
+name: "Terraform: Generate Docs"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - terraform/**/*.tf
+
+jobs:
+  changed_dirs:
+    name: Find changed Terraform modules
+    runs-on: ubuntu-latest
+    outputs:
+      dirs: ${{ steps.changed_dirs.outputs.all_changed_files }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: tj-actions/changed-files@v45
+        id: changed_dirs
+        with:
+          dir_names: true
+          dir_names_max_depth: 4
+          fetch_depth: 0
+          files: |
+            terraform/**/*.tf
+          matrix: true
+          since_last_remote_commit: true
+
+  docs:
+    name: Generate and inject documentation into README
+    needs: changed_dirs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        dir: ${{ fromJson(needs.changed_dirs.outputs.dirs) }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: terraform-docs/gh-actions@v1.3.0
+        with:
+          git-push: true
+          working-dir: ${{ matrix.dir }}
