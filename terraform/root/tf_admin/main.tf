@@ -1,18 +1,3 @@
-import {
-  id = var.organization
-  to = tfe_organization.this
-}
-
-import {
-  id = "admin"
-  to = tfe_project.this["admin"]
-}
-
-import {
-  id = "terraform"
-  to = module.workspace["terraform"].tfe_workspace.this
-}
-
 resource "tfe_organization" "this" {
   email                                                   = var.email
   name                                                    = var.organization
@@ -40,6 +25,8 @@ module "workspace" {
   project_id          = tfe_project.this[each.value.project].id
   queue_all_runs      = each.value.queue_all_runs
   speculative_enabled = each.value.speculative_enabled
+  source_name         = each.value.source_name
+  source_url          = each.value.source_url
   tag_names           = each.value.tag_names
   terraform_version   = each.value.tf_version
   trigger_patterns    = each.value.trigger_patterns

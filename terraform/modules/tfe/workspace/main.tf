@@ -1,7 +1,7 @@
 data "tfe_github_app_installation" "this" {
-  count = var.vcs_repo == null ? 0 : 1
+  for_each = var.vcs_repo
 
-  name = var.vcs_repo.github_app_name
+  name = each.value.github_app_name
 }
 
 resource "tfe_workspace" "this" {
@@ -27,9 +27,9 @@ resource "tfe_workspace" "this" {
     for_each = var.vcs_repo
 
     content {
-      identifier                 = vcs_repo.value.identifier
+      identifier                 = vcs_repo.key
       branch                     = vcs_repo.value.branch
-      github_app_installation_id = data.tfe_github_app_installation.this[0].id
+      github_app_installation_id = data.tfe_github_app_installation.this[vcs_repo.key].id
       oauth_token_id             = vcs_repo.value.oauth_token_id
       tags_regex                 = vcs_repo.value.tags_regex
     }
@@ -37,6 +37,7 @@ resource "tfe_workspace" "this" {
 
   lifecycle {
     ignore_changes = [
+      source_name,
       source_url,
     ]
   }

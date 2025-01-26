@@ -86,14 +86,13 @@ variable "working_directory" {
 }
 variable "vcs_repo" {
   default     = null
-  description = "Configuration of the VCS repository to use for UI/VCS-driven workflow."
-  type = object({
-    identifier      = string
+  description = "Configuration of the VCS repository as identifier => settings map."
+  type = map(object({
     branch          = optional(string, "main")
     github_app_name = optional(string, null)
     oauth_token_id  = optional(string, null)
     tags_regex      = optional(string, null)
-  })
+  }))
 }
 
 # tfe_workspace_settings
