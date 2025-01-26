@@ -25,8 +25,6 @@ module "workspace" {
   project_id          = tfe_project.this[each.value.project].id
   queue_all_runs      = each.value.queue_all_runs
   speculative_enabled = each.value.speculative_enabled
-  source_name         = each.value.source_name
-  source_url          = each.value.source_url
   tag_names           = each.value.tag_names
   terraform_version   = each.value.tf_version
   trigger_patterns    = each.value.trigger_patterns

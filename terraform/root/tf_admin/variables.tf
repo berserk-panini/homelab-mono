@@ -29,8 +29,6 @@ variable "workspaces" {
     project             = string
     queue_all_runs      = optional(bool)
     speculative_enabled = optional(bool)
-    source_name         = optional(string)
-    source_url          = optional(string)
     tag_names           = optional(list(string))
     tf_version          = optional(string, "~>1.10.0")
     trigger_patterns    = optional(list(string))
