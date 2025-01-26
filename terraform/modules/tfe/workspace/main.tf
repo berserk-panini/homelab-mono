@@ -1,3 +1,9 @@
+data "tfe_github_app_installation" "this" {
+  for_each = var.vcs_repo
+
+  name = each.value.github_app_name
+}
+
 resource "tfe_workspace" "this" {
   name                   = var.name
   allow_destroy_plan     = var.allow_destroy_plan
@@ -15,12 +21,23 @@ resource "tfe_workspace" "this" {
   tag_names              = var.tag_names
   terraform_version      = var.terraform_version
   trigger_patterns       = var.trigger_patterns
-  trigger_prefixes       = var.trigger_prefixes
-  vcs_repo               = var.vcs_repo
   working_directory      = var.working_directory
+
+  dynamic "vcs_repo" {
+    for_each = var.vcs_repo
+
+    content {
+      identifier                 = vcs_repo.key
+      branch                     = vcs_repo.value.branch
+      github_app_installation_id = data.tfe_github_app_installation.this[vcs_repo.key].id
+      oauth_token_id             = vcs_repo.value.oauth_token_id
+      tags_regex                 = vcs_repo.value.tags_regex
+    }
+  }
 
   lifecycle {
     ignore_changes = [
+      source_name,
       source_url,
     ]
   }
@@ -36,7 +53,6 @@ resource "tfe_workspace_settings" "this" {
 
 resource "tfe_workspace_run" "this" {
   workspace_id = tfe_workspace.this.id
-  depends_on   = var.depends_on_ids
 
   dynamic "apply" {
     for_each = var.queue_all_runs ? [] : [tfe_workspace.this.id]
