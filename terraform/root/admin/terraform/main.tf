@@ -15,6 +15,22 @@ resource "tfe_project" "this" {
   description = each.value
 }
 
+module "variable_set" {
+  for_each = var.variable_sets
+  source   = "../../../modules/tfe/variable_set"
+
+  name        = each.key
+  description = each.value.description
+  global      = each.value.global
+  project_id  = tfe_project.this[each.value.project].id
+  priority    = each.value.priority
+
+  env_vars       = each.value.env_vars
+  hcl_vars       = each.value.hcl_vars
+  plain_vars     = each.value.plain_vars
+  sensitive_vars = each.value.sensitive_vars
+}
+
 module "workspace" {
   for_each = var.workspaces
   source   = "../../../modules/tfe/workspace"
@@ -30,4 +46,6 @@ module "workspace" {
   trigger_patterns    = each.value.trigger_patterns
   vcs_repo            = each.value.vcs_repo
   working_directory   = each.value.working_directory
+
+  variable_set_ids    = [for v in each.value.variable_sets : module.variable_set[v].id]
 }

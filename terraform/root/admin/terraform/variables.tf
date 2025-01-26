@@ -34,9 +34,25 @@ variable "workspaces" {
     trigger_patterns    = optional(list(string))
     trigger_prefixes    = optional(list(string))
     working_directory   = string
+    variable_sets       = optional(set(string), [])
     vcs_repo = optional(map(object({
       branch          = optional(string, "main")
       github_app_name = string
     })), null)
+  }))
+}
+
+variable "variable_sets" {
+  default     = {}
+  description = "Variable sets to create as name => settings map."
+  type = map(object({
+    description    = string
+    global         = optional(bool, false)
+    priority       = optional(bool, false)
+    project        = string
+    env_vars       = optional(map(string), {})
+    hcl_vars       = optional(map(string), {})
+    plain_vars     = optional(map(string), {})
+    sensitive_vars = optional(set(string), [])
   }))
 }
