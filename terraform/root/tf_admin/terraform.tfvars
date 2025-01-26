@@ -13,7 +13,6 @@ workspaces = {
     working_directory = "terraform/root/tf_admin"
     vcs_repo = {
       "berserk-panini/homelab-mono" = {
-        branch          = "10-root-module-for-managing-the-org"
         github_app_name = "berserk-panini"
       }
     }
