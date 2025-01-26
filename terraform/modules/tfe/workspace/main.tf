@@ -23,12 +23,16 @@ resource "tfe_workspace" "this" {
   trigger_patterns       = var.trigger_patterns
   working_directory      = var.working_directory
 
-  vcs_repo = var.vcs_repo == null ? null : {
-    identifier                 = var.vcs_repo.identifier
-    branch                     = var.vcs_repo.branch
-    github_app_installation_id = data.tfe_github_app_installation.this[0].id
-    oauth_token_id             = var.vcs_repo.oauth_token_id
-    tags_regex                 = var.vcs_repo.tags_regex
+  dynamic "vcs_repo" {
+    for_each = var.vcs_repo
+
+    content {
+      identifier                 = vcs_repo.value.identifier
+      branch                     = vcs_repo.value.branch
+      github_app_installation_id = data.tfe_github_app_installation.this[0].id
+      oauth_token_id             = vcs_repo.value.oauth_token_id
+      tags_regex                 = vcs_repo.value.tags_regex
+    }
   }
 
   lifecycle {

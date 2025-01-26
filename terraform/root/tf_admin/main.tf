@@ -34,7 +34,6 @@ module "workspace" {
   tag_names           = each.value.tag_names
   terraform_version   = each.value.tf_version
   trigger_patterns    = each.value.trigger_patterns
-  trigger_prefixes    = each.value.trigger_prefixes
   vcs_repo            = each.value.vcs_repo
   working_directory   = each.value.working_directory
 }
