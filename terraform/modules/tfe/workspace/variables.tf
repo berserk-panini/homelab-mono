@@ -10,7 +10,7 @@ variable "allow_destroy_plan" {
   type        = bool
 }
 variable "assessments_enabled" {
-  default     = true
+  default     = false
   description = "Whether health checks are enabled for this workspace."
   type        = bool
 }
