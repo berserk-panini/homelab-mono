@@ -29,6 +29,7 @@ This module is intended to be used as a HCP workspace managing the organization 
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_variable_set"></a> [variable\_set](#module\_variable\_set) | ../../../modules/tfe/variable_set | n/a |
 | <a name="module_workspace"></a> [workspace](#module\_workspace) | ../../../modules/tfe/workspace | n/a |
 
 ## Resources
@@ -48,7 +49,8 @@ This module is intended to be used as a HCP workspace managing the organization 
 | <a name="input_organization"></a> [organization](#input\_organization) | The default HCP Terraform organization that resources should belong to. | `string` | n/a | yes |
 | <a name="input_projects"></a> [projects](#input\_projects) | Projects to create as name => description map. | `map(string)` | `{}` | no |
 | <a name="input_token"></a> [token](#input\_token) | The HCP Terraform API token to use for authentication. | `string` | n/a | yes |
-| <a name="input_workspaces"></a> [workspaces](#input\_workspaces) | Workspaces to create as name => settings map. | <pre>map(object({<br/>    auto_apply          = optional(bool, false)<br/>    description         = string<br/>    project             = string<br/>    queue_all_runs      = optional(bool, true)<br/>    speculative_enabled = optional(bool, true)<br/>    tag_names           = optional(list(string))<br/>    tf_version          = optional(string, "~>1.10.0")<br/>    trigger_patterns    = optional(list(string))<br/>    trigger_prefixes    = optional(list(string))<br/>    working_directory   = string<br/>    vcs_repo = optional(map(object({<br/>      branch          = optional(string, "main")<br/>      github_app_name = string<br/>    })), null)<br/>  }))</pre> | `{}` | no |
+| <a name="input_variable_sets"></a> [variable\_sets](#input\_variable\_sets) | Variable sets to create as name => settings map. | <pre>map(object({<br/>    description    = string<br/>    global         = optional(bool, false)<br/>    priority       = optional(bool, false)<br/>    project        = string<br/>    env_vars       = optional(map(string), {})<br/>    hcl_vars       = optional(map(string), {})<br/>    plain_vars     = optional(map(string), {})<br/>    sensitive_vars = optional(set(string), [])<br/>  }))</pre> | `{}` | no |
+| <a name="input_workspaces"></a> [workspaces](#input\_workspaces) | Workspaces to create as name => settings map. | <pre>map(object({<br/>    auto_apply          = optional(bool, false)<br/>    description         = string<br/>    project             = string<br/>    queue_all_runs      = optional(bool, true)<br/>    speculative_enabled = optional(bool, true)<br/>    tag_names           = optional(list(string))<br/>    tf_version          = optional(string, "~>1.10.0")<br/>    trigger_patterns    = optional(list(string))<br/>    trigger_prefixes    = optional(list(string))<br/>    working_directory   = string<br/>    variable_sets       = optional(set(string), [])<br/>    vcs_repo = optional(map(object({<br/>      branch          = optional(string, "main")<br/>      github_app_name = string<br/>    })), null)<br/>  }))</pre> | `{}` | no |
 
 ## Outputs
 
