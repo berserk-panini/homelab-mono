@@ -1,6 +1,7 @@
 # admin/terraform
 
-Implements an administrative root module used for defining the Terraform organization as code, _allowing Terraform to declaratively manage itself_ 🤯
+Implements an administrative root module used for defining the Terraform organization as code, _allowing Terraform to declaratively manage itself_ 🤯  
+This module is intended to be used as a HCP workspace managing the organization it's been set up in.
 
 
 ## 📚🚀 Getting Started on HCP Terraform
