@@ -21,7 +21,6 @@ resource "tfe_workspace" "this" {
   tag_names              = var.tag_names
   terraform_version      = var.terraform_version
   trigger_patterns       = var.trigger_patterns
-  trigger_prefixes       = var.trigger_prefixes
   working_directory      = var.working_directory
 
   vcs_repo = var.vcs_repo == null ? null : {

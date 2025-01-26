@@ -79,11 +79,6 @@ variable "trigger_patterns" {
   description = "List of glob patterns describing files to monitor for changes."
   type        = list(string)
 }
-variable "trigger_prefixes" {
-  default     = null
-  description = "List of repository-root-relative paths which describe all locations to be tracked for changes."
-  type        = list(string)
-}
 variable "working_directory" {
   default     = null
   description = "A relative path that Terraform will execute within."
