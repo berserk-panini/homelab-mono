@@ -14,7 +14,8 @@ variable_sets = {
       "allow_unverified_ssl" = "true"
     }
     plain_vars = {
-      "user" = "terraform"
+      "user"   = "terraform"
+      "server" = "vcenter.local"
     }
     sensitive_vars = [
       "password"
