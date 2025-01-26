@@ -17,7 +17,7 @@ resource "tfe_project" "this" {
 
 module "workspace" {
   for_each = var.workspaces
-  source   = "../../modules/tfe/workspace"
+  source   = "../../../modules/tfe/workspace"
 
   name                = each.key
   auto_apply          = each.value.auto_apply
