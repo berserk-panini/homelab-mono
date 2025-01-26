@@ -27,9 +27,31 @@ resource "tfe_workspace" "this" {
 }
 
 resource "tfe_workspace_settings" "this" {
-  workspace_id = tfe_workspace.this.id
-  agent_pool_id = var.agent_pool_id
-  execution_mode = var.execution_mode
-  global_remote_state = var.global_remote_state
+  workspace_id              = tfe_workspace.this.id
+  agent_pool_id             = var.agent_pool_id
+  execution_mode            = var.execution_mode
+  global_remote_state       = var.global_remote_state
   remote_state_consumer_ids = var.remote_state_consumer_ids
+}
+
+resource "tfe_workspace_run" "this" {
+  workspace_id = tfe_workspace.this.id
+  depends_on   = var.depends_on_ids
+
+  dynamic "apply" {
+    for_each = var.queue_all_runs ? [] : [tfe_workspace.this.id]
+    content {
+      manual_confirm = var.apply.manual_confirm
+      retry          = var.apply.retry
+      retry_attempts = var.apply.retry_attempts
+      wait_for_run   = var.apply.wait_for_run
+    }
+  }
+
+  destroy {
+    manual_confirm = var.destroy.manual_confirm
+    retry          = var.destroy.retry
+    retry_attempts = var.destroy.retry_attempts
+    wait_for_run   = var.destroy.wait_for_run
+  }
 }

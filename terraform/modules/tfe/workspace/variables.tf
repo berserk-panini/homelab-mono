@@ -108,7 +108,7 @@ variable "agent_pool_id" {
 }
 variable "execution_mode" {
   default     = "remote"
-  description = "The execution mode to use."
+  description = "Execution mode to use."
   type        = string
 }
 variable "global_remote_state" {
@@ -118,6 +118,31 @@ variable "global_remote_state" {
 }
 variable "remote_state_consumer_ids" {
   default     = []
-  description = "The set of workspace IDs set as explicit remote state consumers for the given workspace."
+  description = "Set of workspace IDs set as explicit remote state consumers for the given workspace."
   type        = set(string)
+}
+
+# tfe_workspace_run
+variable "depends_on_ids" {
+  default     = []
+  description = "Set of resource IDs that this workspace depends on."
+  type        = set(string)
+}
+variable "apply" {
+  description = "Settings for apply runs."
+  type = object({
+    manual_confirm = optional(bool, false)
+    retry          = optional(bool, true)
+    retry_attempts = optional(number, 1)
+    wait_for_run   = optional(bool, false)
+  })
+}
+variable "destroy" {
+  description = "Settings for destroy runs."
+  type = object({
+    manual_confirm = optional(bool, true)
+    retry          = optional(bool, true)
+    retry_attempts = optional(number, 1)
+    wait_for_run   = optional(bool, false)
+  })
 }
