@@ -1,0 +1,24 @@
+name: "Terraform: Generate Docs"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - terraform/**/*.tf
+  workflow_dispatch:
+
+jobs:
+  docs:
+    name: Generate and inject documentation into README
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: terraform-docs/gh-actions@v1.3.0
+        with:
+          config-file: 'terraform/.terraform-docs.yml'
+          git-push: true
+          find-dir: terraform
