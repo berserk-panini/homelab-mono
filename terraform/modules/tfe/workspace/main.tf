@@ -40,6 +40,7 @@ resource "tfe_workspace_run" "this" {
 
   dynamic "apply" {
     for_each = var.queue_all_runs ? [] : [tfe_workspace.this.id]
+
     content {
       manual_confirm = var.apply.manual_confirm
       retry          = var.apply.retry
@@ -54,4 +55,20 @@ resource "tfe_workspace_run" "this" {
     retry_attempts = var.destroy.retry_attempts
     wait_for_run   = var.destroy.wait_for_run
   }
+}
+
+resource "tfe_workspace_run_task" "this" {
+  for_each = var.run_tasks
+
+  enforcement_level = each.value.enforcement_level
+  stages            = each.value.stages
+  task_id           = each.key
+  workspace_id      = tfe_workspace.this.id
+}
+
+resource "tfe_workspace_variable_set" "this" {
+  for_each = var.variable_set_ids
+
+  variable_set_id = each.key
+  workspace_id    = tfe_workspace.this.id
 }

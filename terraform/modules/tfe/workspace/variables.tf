@@ -85,14 +85,15 @@ variable "trigger_prefixes" {
   type        = list(string)
 }
 variable "vcs_repo" {
+  default     = null
   description = "Configuration of the VCS repository to use for UI/VCS-driven workflow."
-  type = optional(object({
+  type = object({
     identifier                 = string
     branch                     = optional(string)
     github_app_installation_id = optional(string)
     oauth_token_id             = optional(string)
     tags_regex                 = optional(string)
-  }), null)
+  })
 }
 variable "working_directory" {
   default     = null
@@ -102,7 +103,7 @@ variable "working_directory" {
 
 # tfe_workspace_settings
 variable "agent_pool_id" {
-  default = null
+  default     = null
   description = "ID of the agent pool to associate with this workspace."
   type        = string
 }
@@ -129,6 +130,7 @@ variable "depends_on_ids" {
   type        = set(string)
 }
 variable "apply" {
+  default     = {}
   description = "Settings for apply runs."
   type = object({
     manual_confirm = optional(bool, false)
@@ -138,6 +140,7 @@ variable "apply" {
   })
 }
 variable "destroy" {
+  default     = {}
   description = "Settings for destroy runs."
   type = object({
     manual_confirm = optional(bool, true)
@@ -145,4 +148,21 @@ variable "destroy" {
     retry_attempts = optional(number, 1)
     wait_for_run   = optional(bool, false)
   })
+}
+
+# tfe_workspace_run_task
+variable "run_tasks" {
+  default     = {}
+  description = "Settings for run tasks to associate with the workspace."
+  type = map(object({
+    enforcement_level = optional(string, "advisory")
+    stages            = list(string)
+  }))
+}
+
+# tfe_workspace_variable_set
+variable "variable_set_ids" {
+  default     = []
+  description = "Set of variable set IDs to associate with the workspace."
+  type        = set(string)
 }
