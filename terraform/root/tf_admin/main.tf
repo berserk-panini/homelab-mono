@@ -3,6 +3,16 @@ import {
   to = tfe_organization.this
 }
 
+import {
+  id = "admin"
+  to = tfe_project.this["admin"]
+}
+
+import {
+  id = "terraform"
+  to = module.workspace["terraform"].tfe_workspace.this
+}
+
 resource "tfe_organization" "this" {
   email                                                   = var.email
   name                                                    = var.organization
@@ -11,7 +21,6 @@ resource "tfe_organization" "this" {
   cost_estimation_enabled                                 = true
   send_passing_statuses_for_untriggered_speculative_plans = false
   speculative_plan_management_enabled                     = true
-  assessments_enforced                                    = true
 }
 
 resource "tfe_project" "this" {
