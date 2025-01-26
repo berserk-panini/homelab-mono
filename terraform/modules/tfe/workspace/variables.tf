@@ -84,21 +84,21 @@ variable "trigger_prefixes" {
   description = "List of repository-root-relative paths which describe all locations to be tracked for changes."
   type        = list(string)
 }
-variable "vcs_repo" {
-  default     = null
-  description = "Configuration of the VCS repository to use for UI/VCS-driven workflow."
-  type = object({
-    identifier                 = string
-    branch                     = optional(string)
-    github_app_installation_id = optional(string)
-    oauth_token_id             = optional(string)
-    tags_regex                 = optional(string)
-  })
-}
 variable "working_directory" {
   default     = null
   description = "A relative path that Terraform will execute within."
   type        = string
+}
+variable "vcs_repo" {
+  default     = null
+  description = "Configuration of the VCS repository to use for UI/VCS-driven workflow."
+  type = object({
+    identifier      = string
+    branch          = optional(string, "main")
+    github_app_name = optional(string, null)
+    oauth_token_id  = optional(string, null)
+    tags_regex      = optional(string, null)
+  })
 }
 
 # tfe_workspace_settings
@@ -124,11 +124,6 @@ variable "remote_state_consumer_ids" {
 }
 
 # tfe_workspace_run
-variable "depends_on_ids" {
-  default     = []
-  description = "Set of resource IDs that this workspace depends on."
-  type        = set(string)
-}
 variable "apply" {
   default     = {}
   description = "Settings for apply runs."
