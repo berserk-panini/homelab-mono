@@ -1,3 +1,7 @@
+# tfe/variable
+
+This module provides a wrapper around different workspace variable types.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

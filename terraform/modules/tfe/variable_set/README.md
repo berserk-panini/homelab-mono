@@ -1,3 +1,7 @@
+# tfe/variable_set
+
+This module creates a variable set with supplied variables.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
