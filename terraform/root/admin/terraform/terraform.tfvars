@@ -50,8 +50,8 @@ workspaces = {
       }
     }
   }
-  "vsphere-hl01" = {
-    description       = "Manages the hl01 datacenter."
+  "hl01dc01" = {
+    description       = "Manages the hl01dc01 datacenter."
     project           = "datacenter"
     working_directory = "terraform/root/datacenter/vsphere"
     vcs_repo = {
