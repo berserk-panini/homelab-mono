@@ -11,27 +11,31 @@ variable_sets = {
     description    = "Credentials to the hl01 site vSphere API."
     project        = "datacenter"
     project_global = true
-    hcl_vars = {
-      "allow_unverified_ssl" = "true"
+    variables = {
+      hcl = {
+        "allow_unverified_ssl" = "true"
+      }
+      plain = {
+        "vsphere_user"   = "terraform"
+        "vsphere_server" = "vcenter.local"
+      }
+      sensitive = [
+        "vsphere_password"
+      ]
     }
-    plain_vars = {
-      "vsphere_user"   = "terraform"
-      "vsphere_server" = "vcenter.local"
-    }
-    sensitive_vars = [
-      "vsphere_password"
-    ]
   },
   "esxi" = {
     description    = "Credentials to ESXi hosts."
     project        = "datacenter"
     project_global = true
-    plain_vars = {
-      "esxi_username" = "root"
+    variables = {
+      plain = {
+        "esxi_username" = "root"
+      }
+      sensitive = [
+        "esxi_password"
+      ]
     }
-    sensitive_vars = [
-      "esxi_password"
-    ]
   }
 }
 
