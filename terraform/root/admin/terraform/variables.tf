@@ -51,6 +51,7 @@ variable "variable_sets" {
     global         = optional(bool, false)
     priority       = optional(bool, false)
     project        = string
+    project_global = optional(bool, false)
     env_vars       = optional(map(string), {})
     hcl_vars       = optional(map(string), {})
     plain_vars     = optional(map(string), {})

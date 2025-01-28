@@ -19,12 +19,12 @@ module "variable_set" {
   for_each = var.variable_sets
   source   = "../../../modules/tfe/variable_set"
 
-  name        = each.key
-  description = each.value.description
-  global      = each.value.global
-  project_id  = tfe_project.this[each.value.project].id
-  priority    = each.value.priority
-
+  name           = each.key
+  description    = each.value.description
+  global         = each.value.global
+  priority       = each.value.priority
+  project_id     = tfe_project.this[each.value.project].id
+  project_global = each.value.project_global
   env_vars       = each.value.env_vars
   hcl_vars       = each.value.hcl_vars
   plain_vars     = each.value.plain_vars
@@ -47,5 +47,5 @@ module "workspace" {
   vcs_repo            = each.value.vcs_repo
   working_directory   = each.value.working_directory
 
-  variable_set_ids    = [for v in each.value.variable_sets : module.variable_set[v].id]
+  variable_set_ids = [for v in each.value.variable_sets : module.variable_set[v].id]
 }

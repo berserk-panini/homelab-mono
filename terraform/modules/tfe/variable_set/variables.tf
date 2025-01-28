@@ -24,6 +24,11 @@ variable "project_id" {
   description = "ID of the project that should own this variable set."
   type        = string
 }
+variable "project_global" {
+  default     = false
+  description = "Whether the variable set applies to all workspaces in the project."
+  type        = bool
+}
 
 # module.variable
 variable "env_vars" {

@@ -6,6 +6,13 @@ resource "tfe_variable_set" "this" {
   priority          = var.priority
 }
 
+resource "tfe_project_variable_set" "this" {
+  count = var.project_global ? 1 : 0
+
+  project_id      = var.project_id
+  variable_set_id = tfe_variable_set.this.id
+}
+
 module "variable" {
   source = "../variable"
 
