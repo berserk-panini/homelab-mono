@@ -96,4 +96,5 @@ module "variable" {
   hcl_vars       = var.hcl_vars
   plain_vars     = var.plain_vars
   sensitive_vars = var.sensitive_vars
+  workspace_id   = tfe_workspace.this.id
 }
