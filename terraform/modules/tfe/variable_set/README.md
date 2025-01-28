@@ -25,6 +25,7 @@ This module creates a variable set with supplied variables.
 
 | Name | Type |
 |------|------|
+| [tfe_project_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/project_variable_set) | resource |
 | [tfe_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set) | resource |
 
 ## Inputs
@@ -38,6 +39,7 @@ This module creates a variable set with supplied variables.
 | <a name="input_name"></a> [name](#input\_name) | Name of the variable set. | `string` | n/a | yes |
 | <a name="input_plain_vars"></a> [plain\_vars](#input\_plain\_vars) | Plaintext variables to create as name => value map. | `map(string)` | `{}` | no |
 | <a name="input_priority"></a> [priority](#input\_priority) | Whether the variable can be over-written by more specific scopes. | `bool` | `false` | no |
+| <a name="input_project_global"></a> [project\_global](#input\_project\_global) | Whether the variable set applies to all workspaces in the project. | `bool` | `false` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | ID of the project that should own this variable set. | `string` | `null` | no |
 | <a name="input_sensitive_vars"></a> [sensitive\_vars](#input\_sensitive\_vars) | List of sensitive variables to create with default value of `changeme`. | `set(string)` | `[]` | no |
 
