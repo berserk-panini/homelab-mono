@@ -36,6 +36,12 @@ variable "workspaces" {
     trigger_prefixes    = optional(list(string))
     working_directory   = string
     variable_sets       = optional(set(string), [])
+    variables = optional(object({
+      env       = optional(map(string), {})
+      hcl       = optional(map(string), {})
+      plain     = optional(map(string), {})
+      sensitive = optional(set(string), [])
+    }), {})
     vcs_repo = optional(map(object({
       branch          = optional(string, "main")
       github_app_name = string
@@ -52,9 +58,11 @@ variable "variable_sets" {
     priority       = optional(bool, false)
     project        = string
     project_global = optional(bool, false)
-    env_vars       = optional(map(string), {})
-    hcl_vars       = optional(map(string), {})
-    plain_vars     = optional(map(string), {})
-    sensitive_vars = optional(set(string), [])
+    variables = optional(object({
+      env       = optional(map(string), {})
+      hcl       = optional(map(string), {})
+      plain     = optional(map(string), {})
+      sensitive = optional(set(string), [])
+    }), {})
   }))
 }

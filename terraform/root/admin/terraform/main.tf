@@ -25,10 +25,10 @@ module "variable_set" {
   priority       = each.value.priority
   project_id     = tfe_project.this[each.value.project].id
   project_global = each.value.project_global
-  env_vars       = each.value.env_vars
-  hcl_vars       = each.value.hcl_vars
-  plain_vars     = each.value.plain_vars
-  sensitive_vars = each.value.sensitive_vars
+  env_vars       = each.value.variables.env
+  hcl_vars       = each.value.variables.hcl
+  plain_vars     = each.value.variables.plain
+  sensitive_vars = each.value.variables.sensitive
 }
 
 module "workspace" {
@@ -48,4 +48,9 @@ module "workspace" {
   working_directory   = each.value.working_directory
 
   variable_set_ids = [for v in each.value.variable_sets : module.variable_set[v].id]
+
+  env_vars       = each.value.variables.env
+  hcl_vars       = each.value.variables.hcl
+  plain_vars     = each.value.variables.plain
+  sensitive_vars = each.value.variables.sensitive
 }

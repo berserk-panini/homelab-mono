@@ -55,5 +55,10 @@ workspaces = {
         github_app_name = "berserk-panini"
       }
     }
+    variables = {
+      plain = {
+        "datacenter" = "hl01dc01"
+      }
+    }
   }
 }

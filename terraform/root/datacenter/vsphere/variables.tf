@@ -57,6 +57,7 @@ variable "hosts" {
 }
 
 variable "compute_clusters" {
+  default     = {}
   description = "Compute clusters to create as name => settings map."
   type = map(object({
     datacenter_id = string
