@@ -17,7 +17,9 @@ This module creates a workspace and associated resources in HCP Terraform.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_variable"></a> [variable](#module\_variable) | ../variable | n/a |
 
 ## Resources
 
@@ -42,15 +44,19 @@ No modules.
 | <a name="input_auto_apply_run_trigger"></a> [auto\_apply\_run\_trigger](#input\_auto\_apply\_run\_trigger) | Whether runs are automatically applied when created by outside triggers. | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of the workspace. | `string` | n/a | yes |
 | <a name="input_destroy"></a> [destroy](#input\_destroy) | Settings for destroy runs. | <pre>object({<br/>    manual_confirm = optional(bool, true)<br/>    retry          = optional(bool, true)<br/>    retry_attempts = optional(number, 1)<br/>    wait_for_run   = optional(bool, false)<br/>  })</pre> | `{}` | no |
+| <a name="input_env_vars"></a> [env\_vars](#input\_env\_vars) | Environment variables to create as name => value map. | `map(string)` | `{}` | no |
 | <a name="input_execution_mode"></a> [execution\_mode](#input\_execution\_mode) | Execution mode to use. | `string` | `"remote"` | no |
 | <a name="input_file_triggers_enabled"></a> [file\_triggers\_enabled](#input\_file\_triggers\_enabled) | Whether to filter runs based on the changed files in a VCS push. | `bool` | `true` | no |
 | <a name="input_force_delete"></a> [force\_delete](#input\_force\_delete) | Whether to allow force deletion or use soft delete. | `bool` | `false` | no |
 | <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state) | Whether the workspace allows all workspaces in the organization to access its state data during runs. | `bool` | `false` | no |
+| <a name="input_hcl_vars"></a> [hcl\_vars](#input\_hcl\_vars) | HCL code variables to create as name => value map. | `map(string)` | `{}` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the workspace. | `string` | n/a | yes |
+| <a name="input_plain_vars"></a> [plain\_vars](#input\_plain\_vars) | Plaintext variables to create as name => value map. | `map(string)` | `{}` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | ID of the project to associate this workspace with. | `string` | n/a | yes |
 | <a name="input_queue_all_runs"></a> [queue\_all\_runs](#input\_queue\_all\_runs) | Whether the workspace should start automatically performing runs immediately after its creation. | `bool` | `true` | no |
 | <a name="input_remote_state_consumer_ids"></a> [remote\_state\_consumer\_ids](#input\_remote\_state\_consumer\_ids) | Set of workspace IDs set as explicit remote state consumers for the given workspace. | `set(string)` | `[]` | no |
 | <a name="input_run_tasks"></a> [run\_tasks](#input\_run\_tasks) | Settings for run tasks to associate with the workspace. | <pre>map(object({<br/>    enforcement_level = optional(string, "advisory")<br/>    stages            = list(string)<br/>  }))</pre> | `{}` | no |
+| <a name="input_sensitive_vars"></a> [sensitive\_vars](#input\_sensitive\_vars) | List of sensitive variables to create with default value of `changeme`. | `set(string)` | `[]` | no |
 | <a name="input_source_name"></a> [source\_name](#input\_source\_name) | Friendly name for the application or client creating this workspace. | `string` | `"HCP Terraform"` | no |
 | <a name="input_source_url"></a> [source\_url](#input\_source\_url) | The URL of the application or client creating this workspace. | `string` | `"https://app.terraform.io"` | no |
 | <a name="input_speculative_enabled"></a> [speculative\_enabled](#input\_speculative\_enabled) | Whether speculative plans are enabled for this workspace. | `bool` | `true` | no |

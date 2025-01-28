@@ -42,7 +42,7 @@ This module is intended to be used as a HCP workspace managing a single datacent
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_unverified_ssl"></a> [allow\_unverified\_ssl](#input\_allow\_unverified\_ssl) | Whether to disable SSL certificate verification. | `bool` | n/a | yes |
-| <a name="input_compute_clusters"></a> [compute\_clusters](#input\_compute\_clusters) | Compute clusters to create as name => settings map. | <pre>map(object({<br/>    datacenter_id = string<br/>    folder        = optional(string)<br/>    tags          = optional(set(string))<br/>    hosts         = optional(set(string))<br/>    host_managed  = optional(bool, false)<br/>  }))</pre> | n/a | yes |
+| <a name="input_compute_clusters"></a> [compute\_clusters](#input\_compute\_clusters) | Compute clusters to create as name => settings map. | <pre>map(object({<br/>    datacenter_id = string<br/>    folder        = optional(string)<br/>    tags          = optional(set(string))<br/>    hosts         = optional(set(string))<br/>    host_managed  = optional(bool, false)<br/>  }))</pre> | `{}` | no |
 | <a name="input_custom_attributes"></a> [custom\_attributes](#input\_custom\_attributes) | Custom attributes as id => value map. | `map(string)` | `{}` | no |
 | <a name="input_datacenter"></a> [datacenter](#input\_datacenter) | Datacenter name. | `string` | n/a | yes |
 | <a name="input_esxi_password"></a> [esxi\_password](#input\_esxi\_password) | Password to authenticate with the ESXi host. | `string` | n/a | yes |
