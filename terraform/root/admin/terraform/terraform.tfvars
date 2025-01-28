@@ -14,11 +14,21 @@ variable_sets = {
       "allow_unverified_ssl" = "true"
     }
     plain_vars = {
-      "user"   = "terraform"
-      "server" = "vcenter.local"
+      "vsphere_user"   = "terraform"
+      "vsphere_server" = "vcenter.local"
     }
     sensitive_vars = [
-      "password"
+      "vsphere_password"
+    ]
+  },
+  "esxi" = {
+    description = "Credentials to ESXi hosts."
+    project     = "datacenter"
+    plain_vars = {
+      "esxi_username" = "root"
+    }
+    sensitive_vars = [
+      "esxi_password"
     ]
   }
 }

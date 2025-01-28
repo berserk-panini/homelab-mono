@@ -1,16 +1,17 @@
-variable "organization" {
-  description = "The default HCP Terraform organization that resources should belong to."
-  type        = string
-}
-
+# provider.tfe
 variable "token" {
   description = "The HCP Terraform API token to use for authentication."
   ephemeral   = true
   type        = string
 }
 
+# tfe_organization
 variable "email" {
   description = "Email address of the organization owner."
+  type        = string
+}
+variable "organization" {
+  description = "The default HCP Terraform organization that resources should belong to."
   type        = string
 }
 
