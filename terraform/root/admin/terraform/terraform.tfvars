@@ -46,4 +46,14 @@ workspaces = {
       }
     }
   }
+  "vsphere-hl01" = {
+    description       = "Manages the hl01 datacenter."
+    project           = "datacenter"
+    working_directory = "terraform/root/datacenter/vsphere"
+    vcs_repo = {
+      "berserk-panini/homelab-mono" = {
+        github_app_name = "berserk-panini"
+      }
+    }
+  }
 }
