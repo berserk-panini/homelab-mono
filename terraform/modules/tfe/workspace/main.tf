@@ -88,3 +88,13 @@ resource "tfe_workspace_variable_set" "this" {
   variable_set_id = each.key
   workspace_id    = tfe_workspace.this.id
 }
+
+module "variable" {
+  source = "../variable"
+
+  env_vars       = var.env_vars
+  hcl_vars       = var.hcl_vars
+  plain_vars     = var.plain_vars
+  sensitive_vars = var.sensitive_vars
+  workspace_id   = tfe_workspace.this.id
+}
